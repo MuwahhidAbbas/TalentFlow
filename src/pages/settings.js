@@ -21,44 +21,40 @@ export async function renderSettings(app) {
 
         <div class="card" style="max-width: 600px; margin-bottom: var(--space-6);">
           <h3 style="margin-bottom: var(--space-4);">Database Connection</h3>
-          <div style="display:flex; align-items:center; gap: var(--space-3); margin-bottom: var(--space-5);">
-            <div style="width:10px; height:10px; border-radius:50%; background:${isConnected ? 'var(--success)' : 'var(--error)'}; box-shadow: 0 0 8px ${isConnected ? 'var(--success)' : 'var(--error)'};"></div>
-            <span style="font-size:var(--text-sm); color: ${isConnected ? 'var(--success)' : 'var(--error)'};">
-              ${isConnected ? 'Connected to Supabase' : 'Not connected'}
-            </span>
+          <div style="display:flex; align-items:center; gap: var(--space-3); margin-bottom: var(--space-6);">
+            <div style="width:12px; height:12px; border-radius:50%; background:${isConnected ? 'var(--success)' : 'var(--error)'}; box-shadow: 0 0 12px ${isConnected ? 'var(--success)' : 'var(--error)'};"></div>
+            <div style="display:flex; flex-direction:column;">
+              <span style="font-weight:600; color: ${isConnected ? 'var(--success)' : 'var(--error)'};">
+                ${isConnected ? 'Supabase Securely Connected' : 'Supabase Not Configured'}
+              </span>
+              <span style="font-size:var(--text-xs); color: var(--text-tertiary);">
+                ${isConnected ? 'Your instance is online and ready.' : 'Please check your .env configuration.'}
+              </span>
+            </div>
           </div>
 
           ${!isConnected ? `
-            <div style="padding: var(--space-4); background: var(--error-dim); border: 1px solid rgba(248,113,113,0.2); border-radius: var(--radius-md); margin-bottom: var(--space-5);">
-              <p style="font-size:var(--text-sm); color: var(--text-primary);">
-                <strong>Setup Required:</strong> Create a <code>.env</code> file in the project root with:
+            <div style="padding: var(--space-5); background: var(--error-dim); border: 1px solid rgba(248,113,113,0.2); border-radius: var(--radius-lg); margin-bottom: var(--space-6);">
+              <p style="font-size:var(--text-sm); color: var(--text-primary); margin-bottom: var(--space-3);">
+                <strong>Missing Configuration:</strong> We couldn't find your Supabase credentials.
               </p>
-              <pre style="background: var(--bg-surface); padding: var(--space-3); border-radius: var(--radius-sm); margin-top: var(--space-3); font-size: var(--text-xs); color: var(--accent-gold);">VITE_SUPABASE_URL=https://your-project.supabase.co
-VITE_SUPABASE_ANON_KEY=your-anon-key-here</pre>
+              <div style="font-size:var(--text-xs); color: var(--text-secondary); line-height:1.5;">
+                Ensure your <code>.env</code> file is in the root directory and contains the correct <strong>VITE_SUPABASE_URL</strong> and <strong>VITE_SUPABASE_ANON_KEY</strong>.
+              </div>
             </div>
           ` : ''}
 
-          <button class="btn btn-secondary" id="btn-test-connection">${icons.database} Test Connection</button>
+          <div style="display:flex; gap: var(--space-3);">
+            <button class="btn btn-secondary" id="btn-test-connection" style="flex:1;">${icons.database} Run Connection Test</button>
+            <button class="btn btn-ghost" onclick="window.location.reload()" style="border: 1px solid var(--border-subtle);">Refresh App</button>
+          </div>
         </div>
 
         <!-- Data Export -->
-        <div class="card" style="max-width: 600px; margin-bottom: var(--space-6);">
-          <h3 style="margin-bottom: var(--space-4);">Data Export</h3>
-          <p style="font-size:var(--text-sm); color:var(--text-secondary); margin-bottom:var(--space-4);">Export all profiles as a JSON file for backup or migration.</p>
-          <button class="btn btn-secondary" id="btn-export">${icons.download} Export All Profiles</button>
-        </div>
-
-        <!-- Setup Guide -->
         <div class="card" style="max-width: 600px;">
-          <h3 style="margin-bottom: var(--space-4);">Quick Setup Guide</h3>
-          <ol style="font-size:var(--text-sm); color:var(--text-secondary); padding-left:var(--space-5); display:flex; flex-direction:column; gap:var(--space-3);">
-            <li>Create a free Supabase project at <a href="https://supabase.com" target="_blank">supabase.com</a></li>
-            <li>Go to <strong>SQL Editor</strong> and run the schema from <code>supabase/schema.sql</code></li>
-            <li>Go to <strong>Storage</strong> → Create a public bucket named <code>attachments</code></li>
-            <li>Go to <strong>Settings → API</strong> → Copy your <strong>URL</strong> and <strong>anon/public key</strong></li>
-            <li>Create a <code>.env</code> file with <code>VITE_SUPABASE_URL</code> and <code>VITE_SUPABASE_ANON_KEY</code></li>
-            <li>Run <code>npm run dev</code> to start the app</li>
-          </ol>
+          <h3 style="margin-bottom: var(--space-4);">Data & Backups</h3>
+          <p style="font-size:var(--text-sm); color:var(--text-secondary); margin-bottom:var(--space-5);">Securely export your entire talent directory database as a portable JSON file.</p>
+          <button class="btn btn-secondary" id="btn-export" style="width:100%; justify-content:center;">${icons.download} Export All Profiles (.json)</button>
         </div>
       </div>
     </main>
