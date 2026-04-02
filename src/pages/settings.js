@@ -38,8 +38,9 @@ export async function renderSettings(app) {
               <p style="font-size:var(--text-sm); color: var(--text-primary); margin-bottom: var(--space-3);">
                 <strong>Missing Configuration:</strong> We couldn't find your Supabase credentials.
               </p>
-              <div style="font-size:var(--text-xs); color: var(--text-secondary); line-height:1.5;">
-                Ensure your <code>.env</code> file is in the root directory and contains the correct <strong>VITE_SUPABASE_URL</strong> and <strong>VITE_SUPABASE_ANON_KEY</strong>.
+              <div style="font-size:var(--text-xs); color: var(--text-secondary); line-height:1.6;">
+                <p style="margin-bottom: var(--space-2);"><strong>Local:</strong> Ensure your <code>.env</code> file is in the root directory.</p>
+                <p><strong>Netlify:</strong> Go to <b>Site Settings → Environment variables</b> and add <code>VITE_SUPABASE_URL</code> and <code>VITE_SUPABASE_ANON_KEY</code> manually.</p>
               </div>
             </div>
           ` : ''}
