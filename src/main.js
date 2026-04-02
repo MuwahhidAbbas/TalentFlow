@@ -50,11 +50,13 @@ async function boot() {
   setTimeout(() => {
     const loadingScreen = document.getElementById('loading-screen');
     if (loadingScreen) {
-      loadingScreen.style.transition = 'opacity 0.5s ease';
+      loadingScreen.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
       loadingScreen.style.opacity = '0';
-      setTimeout(() => loadingScreen.remove(), 500);
+      setTimeout(() => loadingScreen.remove(), 600);
     }
-    document.body.style.overflow = '';
+    // Explicitly restore scroll - use visible to ensure it overrides any other rule
+    document.body.style.overflow = 'visible';
+    document.documentElement.style.overflow = 'visible';
   }, remaining);
 }
 
